@@ -25,7 +25,10 @@ export default defineConfig([
     },
     rules: {
       // Catch bugs early
-      'no-unused-vars': ['warn', { varsIgnorePattern: '^[A-Z_]' }],
+      'no-unused-vars': [
+        'warn',
+        { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' },
+      ],
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-debugger': 'warn',
       eqeqeq: ['error', 'always', { null: 'ignore' }],

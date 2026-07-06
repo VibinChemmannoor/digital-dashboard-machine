@@ -1,0 +1,166 @@
+@import 'tailwindcss';
+
+/* Class-based dark mode: applies when a `.dark` ancestor is present */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+   Design tokens — single source of truth.
+   Light values on :root, overridden under .dark. Mapped into Tailwind's theme
+   below via @theme inline so utilities (bg-surface, text-muted, …) stay in sync
+   with dark mode automatically.
+--------------------------------------------------------------------------- */
+:root {
+  /* Brand / primary (indigo-blue) */
+  --primary-50: #eef2ff;
+  --primary-100: #e0e7ff;
+  --primary-200: #c7d2fe;
+  --primary-300: #a5b4fc;
+  --primary-400: #7f92f8;
+  --primary-500: #5b6ef5;
+  --primary-600: #3b5bfe;
+  --primary-700: #3049d6;
+  --primary-800: #2839a8;
+  --primary-900: #232f80;
+
+  /* Surfaces & canvas */
+  --bg: #eceef1; /* app canvas (behind cards) */
+  --surface: #ffffff; /* cards, sidebar, panels */
+  --surface-2: #f7f8fa; /* subtle raised / hover */
+  --surface-3: #f0f2f6; /* inputs, chips */
+
+  /* Text */
+  --text: #1b2333; /* headings / primary */
+  --text-body: #374151; /* body */
+  --text-muted: #6b7280; /* secondary */
+  --text-subtle: #9aa2b1; /* placeholders / hints */
+
+  /* Lines */
+  --border: #e6e8ee;
+  --border-strong: #d5d9e2;
+
+  /* Feedback */
+  --success: #22c55e;
+  --success-bg: #dcfce7;
+  --warning: #f59e0b;
+  --warning-bg: #fef3c7;
+  --danger: #ef4444;
+  --danger-bg: #fee2e2;
+  --info: #3b82f6;
+  --info-bg: #dbeafe;
+
+  /* Effects */
+  --ring: color-mix(in srgb, var(--primary-600) 40%, transparent);
+  --shadow-card:
+    0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.06);
+  --shadow-pop: 0 8px 24px rgba(16, 24, 40, 0.12);
+}
+
+.dark {
+  --bg: #0d1117;
+  --surface: #161b26;
+  --surface-2: #1c2230;
+  --surface-3: #232a3a;
+
+  --text: #eef1f7;
+  --text-body: #cdd3df;
+  --text-muted: #97a0b2;
+  --text-subtle: #6b7488;
+
+  --border: #262d3c;
+  --border-strong: #323a4c;
+
+  --success-bg: color-mix(in srgb, var(--success) 22%, transparent);
+  --warning-bg: color-mix(in srgb, var(--warning) 22%, transparent);
+  --danger-bg: color-mix(in srgb, var(--danger) 22%, transparent);
+  --info-bg: color-mix(in srgb, var(--info) 22%, transparent);
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-pop: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+@theme inline {
+  --color-primary-50: var(--primary-50);
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+  --color-primary-300: var(--primary-300);
+  --color-primary-400: var(--primary-400);
+  --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600);
+  --color-primary-700: var(--primary-700);
+  --color-primary-800: var(--primary-800);
+  --color-primary-900: var(--primary-900);
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+
+  --color-text: var(--text);
+  --color-body: var(--text-body);
+  --color-muted: var(--text-muted);
+  --color-subtle: var(--text-subtle);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --color-info: var(--info);
+  --color-info-bg: var(--info-bg);
+
+  --font-sans:
+    'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+
+  --shadow-card: var(--shadow-card);
+  --shadow-pop: var(--shadow-pop);
+
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.125rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Respect reduced-motion globally */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Thin, theme-aware scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+}
