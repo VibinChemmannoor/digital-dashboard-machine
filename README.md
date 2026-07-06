@@ -1,75 +1,63 @@
-# React + TypeScript + Vite
+# Frontend Task — Campaign Automation UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A pixel-accurate, fully responsive rebuild of a LinkedIn-outreach / campaign-automation
+SaaS dashboard. Self-contained frontend (static mock data, no backend) with a light/dark
+theme, built from a Figma workflow of 14 screens.
 
-Currently, two official plugins are available:
+## Tech stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 19** + **Vite** (JavaScript) with the React Compiler
+- **Tailwind CSS v4** (`@tailwindcss/vite`) — design tokens as CSS variables, class-based dark mode
+- **react-router-dom v7** — nested routes; the campaign wizard steps are child routes
+- **lucide-react** icons + custom brand glyphs
+- **d3-shape / d3-scale** — hand-built SVG charts (health ring, reply gauge, bar chart)
+- **ESLint + Prettier + Husky/lint-staged** enforced on commit
 
-## React Compiler
+## Scripts
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev          # start the dev server
+npm run build        # production build
+npm run preview      # preview the production build
+npm run lint         # eslint
+npm run lint:fix     # eslint --fix
+npm run format       # prettier --write
+npm run format:check # prettier --check
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Screens
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Campaigns list** (`/campaigns`) — filterable table with row actions; empty state at
+  `/campaigns?state=empty`
+- **Select Workflow Mode** modal → **Advance Campaign wizard** (`/campaigns/new/:mode`):
+  1. Define Target Audience (LinkedIn Search / CSV upload + column mapping / Lookalike / Webhook)
+  2. Sender Profiles (health rings, LinkedIn & Email tabs)
+  3. Settings (sending window, AI Assist, Zapier triggers)
+  4. Stats — empty state → launch → analytics dashboard
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project structure
+
 ```
+src/
+  components/
+    ui/        # ~24 reusable primitives (Button, Modal, Table, charts, …)
+    layout/    # AppShell, Sidebar, Topbar, drawer, theme toggle
+    icons/     # brand glyphs + illustrations
+  features/campaign/
+    list/       # all-campaigns table + filters + row menu
+    workflow/   # Select Workflow Mode modal
+    wizard/     # WizardLayout, stepper, footer, steps/*
+    lookalikes/ # Lookalikes modal
+  context/     # ThemeProvider, WizardProvider + reducer, breadcrumb
+  hooks/       # useTheme, useMediaQuery, useDisclosure, useWizard, …
+  data/mock/   # static campaigns, senders, lead lists, stats
+  lib/         # cn(), formatters, constants
+  styles/      # Tailwind entry + design tokens
+```
+
+## Theming
+
+All colors are CSS variables in `src/styles/tailwind.css`, redefined under `.dark` and
+mapped into Tailwind (`bg-surface`, `text-muted`, `primary-*`, …). Theme is toggled via the
+sidebar control, persisted to `localStorage`, and applied pre-paint (no flash) by an inline
+script in `index.html`.

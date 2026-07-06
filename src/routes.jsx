@@ -6,7 +6,6 @@ import Step2Senders from './features/campaign/wizard/steps/Step2Senders'
 import Step3Settings from './features/campaign/wizard/steps/Step3Settings'
 import Step4Stats from './features/campaign/wizard/steps/Step4Stats'
 import CampaignListPage from './pages/CampaignListPage'
-import KitchenSinkPage from './pages/KitchenSinkPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 /**
@@ -27,9 +26,6 @@ export default function AppRoutes() {
           <Route path="step-3-settings" element={<Step3Settings />} />
           <Route path="step-4-stats" element={<Step4Stats />} />
         </Route>
-
-        {/* Temporary primitives showcase — remove once screens are built */}
-        <Route path="/kitchen-sink" element={<KitchenSinkPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
