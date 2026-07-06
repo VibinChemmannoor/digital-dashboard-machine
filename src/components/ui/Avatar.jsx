@@ -63,3 +63,40 @@ export function Avatar({
     </span>
   )
 }
+
+/**
+ * Overlapping stack of avatars with an optional "+N" overflow chip.
+ * @param {{
+ *   people: { name?: string, avatar?: string }[],
+ *   size?: keyof typeof SIZES,
+ *   max?: number,
+ *   className?: string,
+ * }} props
+ */
+export function AvatarGroup({ people = [], size = 'sm', max = 3, className }) {
+  const shown = people.slice(0, max)
+  const extra = people.length - shown.length
+  return (
+    <div className={cn('flex items-center -space-x-2', className)}>
+      {shown.map((p, i) => (
+        <Avatar
+          key={i}
+          src={p.avatar}
+          name={p.name}
+          size={size}
+          className="ring-2 ring-surface"
+        />
+      ))}
+      {extra > 0 && (
+        <span
+          className={cn(
+            'inline-flex items-center justify-center rounded-full bg-surface-3 font-semibold text-muted ring-2 ring-surface',
+            SIZES[size],
+          )}
+        >
+          +{extra}
+        </span>
+      )}
+    </div>
+  )
+}

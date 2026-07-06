@@ -1,5 +1,5 @@
 // Barrel export for UI primitives.
-export { Avatar } from './Avatar'
+export { Avatar, AvatarGroup } from './Avatar'
 export { Accordion } from './Accordion'
 export { Badge } from './Badge'
 export { BarChart } from './BarChart'
