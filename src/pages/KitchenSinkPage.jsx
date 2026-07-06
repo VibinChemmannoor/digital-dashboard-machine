@@ -16,6 +16,7 @@ import {
   Accordion,
   Avatar,
   Badge,
+  BarChart,
   Button,
   Card,
   Checkbox,
@@ -23,6 +24,8 @@ import {
   DropdownMenu,
   Dropzone,
   EmptyState,
+  GaugeChart,
+  HealthRing,
   Input,
   Modal,
   NumberStepper,
@@ -179,6 +182,43 @@ export default function KitchenSinkPage() {
           maxReached={3}
           onStepClick={setStep}
         />
+      </Section>
+
+      <Section title="Charts (d3): HealthRing, GaugeChart, BarChart">
+        <div className="flex items-center gap-4">
+          <HealthRing value={72} />
+          <HealthRing value={92} size={52} />
+          <HealthRing value={38} size={52} />
+        </div>
+        <div className="w-52">
+          <GaugeChart value={80} sublabel="Discussions" />
+        </div>
+        <div className="w-full max-w-xl">
+          <BarChart
+            data={[
+              { label: 'New Leads', value: 1628, color: '#6366f1' },
+              {
+                label: 'Invites Sent',
+                value: 988,
+                sub: '61%',
+                color: '#8ea2f5',
+              },
+              {
+                label: 'Invites Accepted',
+                value: 507,
+                sub: '49%',
+                color: '#bcd0f7',
+              },
+              {
+                label: 'Messages Sent',
+                value: 460,
+                sub: '93%',
+                color: '#a7e3c4',
+              },
+              { label: 'Replies', value: 202, sub: '44%', color: '#cdeede' },
+            ]}
+          />
+        </div>
       </Section>
 
       <Section title="Accordion">
