@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { AppShell } from './components/layout/AppShell'
 import CampaignListPage from './pages/CampaignListPage'
+import KitchenSinkPage from './pages/KitchenSinkPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 /**
@@ -13,6 +14,8 @@ export default function AppRoutes() {
       <Route element={<AppShell />}>
         <Route path="/" element={<Navigate to="/campaigns" replace />} />
         <Route path="/campaigns" element={<CampaignListPage />} />
+        {/* Temporary primitives showcase — remove once screens are built */}
+        <Route path="/kitchen-sink" element={<KitchenSinkPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
