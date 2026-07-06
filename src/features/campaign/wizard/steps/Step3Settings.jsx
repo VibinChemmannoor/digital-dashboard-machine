@@ -1,22 +1,20 @@
 import { Card, Input } from '../../../../components/ui'
 import { useWizard } from '../../../../hooks/useWizard'
 import { WIZARD_ACTIONS } from '../../../../context/wizardReducer'
+import { SendingWindow } from './settings/SendingWindow'
+import { AiAssistCard } from './settings/AiAssistCard'
+import { IntegrationsRow } from './settings/IntegrationsRow'
 
-/** Scaffold placeholder — replaced by the real Step 3 UI in Phase 7. */
+/** Step 3 — Settings (screen 11). */
 export default function Step3Settings() {
   const { state, dispatch } = useWizard()
+
   return (
-    <Card padded className="space-y-3">
-      <div>
-        <h2 className="text-base font-semibold text-text">Settings</h2>
-        <p className="text-sm text-muted">
-          Scaffold placeholder — name the campaign to enable “Next”.
-        </p>
-      </div>
+    <Card padded className="space-y-5">
       <Input
         label="Campaign name"
         placeholder="New Outreach Campaign"
-        containerClassName="max-w-md"
+        containerClassName="max-w-2xl"
         value={state.settings.campaignName}
         onChange={(e) =>
           dispatch({
@@ -25,6 +23,13 @@ export default function Step3Settings() {
           })
         }
       />
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        <SendingWindow />
+        <AiAssistCard />
+      </div>
+
+      <IntegrationsRow />
     </Card>
   )
 }
