@@ -31,7 +31,7 @@ export function ThemeToggle({ collapsed = false }) {
     <div
       role="radiogroup"
       aria-label="Theme"
-      className="flex items-center gap-1 rounded-xl border border-border bg-surface-2 p-1"
+      className="flex items-center gap-1 rounded-full border border-border bg-surface-2 p-1"
     >
       {[
         { key: 'light', label: 'Light', Icon: Sun },
@@ -46,7 +46,7 @@ export function ThemeToggle({ collapsed = false }) {
             aria-checked={active}
             onClick={() => setTheme(key)}
             className={cn(
-              'flex flex-1 items-center justify-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition',
+              'flex flex-1 items-center justify-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition',
               active
                 ? 'bg-surface text-text shadow-card'
                 : 'text-muted hover:text-body',
