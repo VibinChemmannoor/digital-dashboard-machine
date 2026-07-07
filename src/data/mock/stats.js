@@ -49,15 +49,40 @@ export const campaignStats = {
   ],
 
   activity: [
-    { id: 1, time: '09:14 AM', text: 'Campaign started', by: 'Aman S.' },
-    { id: 2, time: '10:30 AM', text: 'Reply received', by: 'Suresh K.' },
-    { id: 3, time: '10:35 AM', text: 'Follow-up message sent', by: 'System' },
+    {
+      id: 1,
+      type: 'started',
+      time: '09:14 AM',
+      text: 'Campaign started',
+      by: 'Aman S.',
+    },
+    {
+      id: 2,
+      type: 'reply',
+      time: '10:30 AM',
+      text: 'Reply received',
+      by: 'Suresh K.',
+    },
+    {
+      id: 3,
+      type: 'followup',
+      time: '10:35 AM',
+      text: 'Follow-up message sent',
+      by: 'System',
+    },
     {
       id: 4,
+      type: 'connection',
       time: '10:36 AM',
       text: 'Connection accepted',
       by: 'Suresh K. (Prospect)',
     },
-    { id: 5, time: '10:45 AM', text: 'Campaign paused', by: 'Aman S.' },
+    {
+      id: 5,
+      type: 'paused',
+      time: '10:45 AM',
+      text: 'Campaign paused',
+      by: 'Aman S.',
+    },
   ],
 }
