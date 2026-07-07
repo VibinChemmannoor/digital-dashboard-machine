@@ -34,7 +34,7 @@ export function AppShell() {
             collapsed={collapsed}
             onToggleCollapse={() => setCollapsed((v) => !v)}
             showCollapseButton
-            className="shrink-0 rounded-2xl border shadow-card"
+            className="shrink-0 rounded-lg border shadow-card"
           />
         ) : (
           <MobileDrawer open={drawer.isOpen} onClose={drawer.close}>
@@ -42,7 +42,7 @@ export function AppShell() {
           </MobileDrawer>
         )}
 
-        <main className="flex min-w-0 flex-1 flex-col overflow-hidden bg-surface lg:rounded-2xl lg:border lg:border-border lg:shadow-card">
+        <main className="flex min-w-0 flex-1 flex-col overflow-hidden bg-surface lg:rounded-lg lg:border lg:border-border lg:shadow-card">
           <Topbar showMenuButton={!isDesktop} onOpenMenu={drawer.open} />
           <div className="flex-1 overflow-y-auto">
             <Outlet />

@@ -17,7 +17,7 @@ export function SidebarNav({ collapsed = false, onItemClick }) {
           title={collapsed ? label : undefined}
           className={({ isActive }) =>
             cn(
-              'group flex items-center rounded-xl text-sm font-medium transition',
+              'group flex items-center rounded-lg text-sm font-medium transition',
               collapsed ? 'h-11 w-11 justify-center' : 'gap-3 px-3 py-2.5',
               isActive
                 ? 'bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-[0_6px_16px_-6px_var(--primary-600)]'
