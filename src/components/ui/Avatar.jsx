@@ -36,22 +36,24 @@ export function Avatar({
   return (
     <span
       className={cn(
-        'relative inline-flex shrink-0 select-none items-center justify-center overflow-hidden rounded-full bg-primary-100 font-semibold uppercase text-primary-700 dark:bg-primary-900/40 dark:text-primary-200',
+        'relative inline-flex shrink-0 select-none items-center justify-center rounded-full font-semibold uppercase',
         SIZES[size],
         className,
       )}
     >
-      {showImg ? (
-        <img
-          src={src}
-          alt={name}
-          loading="lazy"
-          onError={() => setFailed(true)}
-          className="h-full w-full object-cover"
-        />
-      ) : (
-        toInitials(name)
-      )}
+      <span className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-primary-100 text-primary-700 dark:bg-primary-900/40 dark:text-primary-200">
+        {showImg ? (
+          <img
+            src={src}
+            alt={name}
+            loading="lazy"
+            onError={() => setFailed(true)}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          toInitials(name)
+        )}
+      </span>
       {online && (
         <span
           className={cn(
